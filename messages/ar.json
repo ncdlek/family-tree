@@ -197,7 +197,11 @@
     "revokeAccess": "إلغاء الوصول",
     "generateNewToken": "إنشاء رابط جديد",
     "anyoneWithLink": "يمكن لأي شخص لديه الرابط عرض الشجرة",
-    "publicAccess": "الوصول العام"
+    "publicAccess": "الوصول العام",
+    "publicTree": "شجرة عامة",
+    "publicTreeDescription": "يمكن لأي شخص لديه الرابط عرض هذه الشجرة",
+    "hideLiving": "إخفاء الأحياء",
+    "hideLivingDescription": "سيتم إخفاء الأشخاص الأحياء في العروض المشتركة"
   },
   "validation": {
     "required": "هذا الحقل مطلوب",

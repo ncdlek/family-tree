@@ -197,7 +197,11 @@
     "revokeAccess": "Revoke Access",
     "generateNewToken": "Generate New Link",
     "anyoneWithLink": "Anyone with the link can view",
-    "publicAccess": "Public Access"
+    "publicAccess": "Public Access",
+    "publicTree": "Public Tree",
+    "publicTreeDescription": "Anyone with the link can view this tree",
+    "hideLiving": "Hide Living People",
+    "hideLivingDescription": "Living people will be hidden in shared views"
   },
   "validation": {
     "required": "This field is required",

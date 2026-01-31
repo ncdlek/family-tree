@@ -197,7 +197,11 @@
     "revokeAccess": "Erişimi İptal Et",
     "generateNewToken": "Yeni Bağlantı Oluştur",
     "anyoneWithLink": "Bağlantısı olan herkes görüntüleyebilir",
-    "publicAccess": "Herkese Açık Erişim"
+    "publicAccess": "Herkese Açık Erişim",
+    "publicTree": "Herkese Açık Soyağacı",
+    "publicTreeDescription": "Bağlantısı olan herkes bu soyağacını görüntüleyebilir",
+    "hideLiving": "Yaşayanları Gizle",
+    "hideLivingDescription": "Yaşayan kişiler paylaşılan görünümlerde gizlenecek"
   },
   "validation": {
     "required": "Bu alan zorunludur",

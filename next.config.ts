@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Force cache busting for translations
+  generateBuildId: () => {
+    return `build-${Date.now()}`;
+  },
 };
 
 export default withNextIntl(nextConfig);

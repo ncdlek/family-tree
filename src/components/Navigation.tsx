@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Button as ButtonUI } from "@/components/ui/button"; // Will be replaced with Apple-style button
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Settings, User, LogOut, Menu, ChevronDown, X, TreePine } from "lucide-react";
+import { Settings, User, LogOut, Menu, X, TreePine } from "lucide-react";
 import { getInitials } from "@/lib/utils";
 
 interface NavigationProps {
@@ -61,16 +60,12 @@ export function Navigation({ className }: NavigationProps) {
       ]
     : [];
 
-  // Get locale from pathname
-  const locale = pathname?.split("/")[1] || "en";
-  const isRTL = locale === "ar";
-
   return (
     <nav className={`sticky top-0 z-50 w-full backdrop-blur-xl bg-background/80 border-b border-border/40 ${className}`}>
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex h-16 items-center justify-between gap-4">
           {/* Logo */}
-          <Link href={`/${locale}`} className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-sm">
               <TreePine className="h-5 w-5 text-white" />
             </div>
@@ -85,7 +80,7 @@ export function Navigation({ className }: NavigationProps) {
               navLinks.map((link) => (
                 <Link
                   key={link.href}
-                  href={`/${locale}${link.href}`}
+                  href={link.href}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                     isActive(link.href)
                       ? "bg-primary/10 text-primary"
@@ -101,12 +96,12 @@ export function Navigation({ className }: NavigationProps) {
           <div className="flex items-center gap-2">
             {!isLoading && !user && (
               <>
-                <Link href={`/${locale}/login`}>
+                <Link href="/login">
                   <Button variant="ghost" size="sm" className="text-sm">
                     Sign In
                   </Button>
                 </Link>
-                <Link href={`/${locale}/signup`}>
+                <Link href="/signup">
                   <Button size="sm" className="text-sm shadow-sm">
                     Get Started
                   </Button>
@@ -128,7 +123,6 @@ export function Navigation({ className }: NavigationProps) {
                       <span className="hidden lg:inline-block text-sm font-medium">
                         {user.name || "User"}
                       </span>
-                      <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform ${isRTL ? "rotate-180" : ""}`} />
                     </button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-48">
@@ -139,8 +133,8 @@ export function Navigation({ className }: NavigationProps) {
                       <p className="text-sm font-medium truncate">{user.email}</p>
                     </div>
                     <DropdownMenuItem asChild>
-                      <Link href={`/${locale}/settings`} className="cursor-pointer">
-                        <Settings className="h-4 w-4 mr-2 rtl:ml-2 rtl:mr-0" />
+                      <Link href="/settings" className="cursor-pointer">
+                        <Settings className="h-4 w-4 mr-2" />
                         Settings
                       </Link>
                     </DropdownMenuItem>
@@ -149,14 +143,14 @@ export function Navigation({ className }: NavigationProps) {
                       onClick={handleSignOut}
                       className="text-destructive focus:text-destructive cursor-pointer"
                     >
-                      <LogOut className="h-4 w-4 mr-2 rtl:ml-2 rtl:mr-0" />
+                      <LogOut className="h-4 w-4 mr-2" />
                       Sign Out
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
 
                 {/* Settings Icon (mobile) */}
-                <Link href={`/${locale}/settings`} className="md:hidden">
+                <Link href="/settings" className="md:hidden">
                   <Button variant="ghost" size="icon" className="h-9 w-9">
                     <Settings className="h-4 w-4" />
                   </Button>
@@ -187,7 +181,7 @@ export function Navigation({ className }: NavigationProps) {
               navLinks.map((link) => (
                 <Link
                   key={link.href}
-                  href={`/${locale}${link.href}`}
+                  href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                     isActive(link.href)
@@ -201,14 +195,14 @@ export function Navigation({ className }: NavigationProps) {
             {!user && (
               <>
                 <Link
-                  href={`/${locale}/login`}
+                  href="/login"
                   onClick={() => setMobileMenuOpen(false)}
                   className="block px-4 py-2.5 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted/50"
                 >
                   Sign In
                 </Link>
                 <Link
-                  href={`/${locale}/signup`}
+                  href="/signup"
                   onClick={() => setMobileMenuOpen(false)}
                   className="block px-4 py-2.5 rounded-lg text-sm font-medium bg-primary text-primary-foreground shadow-sm"
                 >

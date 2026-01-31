@@ -1,11 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useLocale } from "next-intl";
 import { TreePine } from "lucide-react";
 
 export function Footer() {
-  const locale = useLocale();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -20,13 +18,13 @@ export function Footer() {
           </div>
           <div className="flex items-center gap-4">
             <Link
-              href={`/${locale}/privacy`}
+              href="/privacy"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Privacy
             </Link>
             <Link
-              href={`/${locale}/terms`}
+              href="/terms"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Terms

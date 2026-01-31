@@ -1,7 +1,6 @@
 "use client";
-// Build: 2024-01-31-v2
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,7 +16,6 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Copy, Link as LinkIcon, Mail, UserPlus, RefreshCw, Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { useToast } from "@/hooks/use-toast";
 
 interface ShareDialogProps {
@@ -57,7 +55,6 @@ export function ShareDialog({
   onRevokeAccess,
   onInviteUser,
 }: ShareDialogProps) {
-  const t = useTranslations("share");
   const { toast } = useToast();
   const [localIsPublic, setLocalIsPublic] = useState(isPublic);
   const [localHideLiving, setLocalHideLiving] = useState(hideLiving);
@@ -66,7 +63,6 @@ export function ShareDialog({
   const [isInviting, setIsInviting] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
 
-  // Mock shared users - in real app, fetch from API
   const [sharedUsers, setSharedUsers] = React.useState<TreeAccess[]>([]);
 
   const shareUrl = shareToken
@@ -87,7 +83,7 @@ export function ShareDialog({
       await navigator.clipboard.writeText(shareUrl);
       toast({
         title: "Success",
-        description: t("linkCopied"),
+        description: "Link copied to clipboard!",
       });
     } catch (error) {
       toast({
@@ -125,7 +121,7 @@ export function ShareDialog({
       await onInviteUser(inviteEmail, accessLevel);
       toast({
         title: "Success",
-        description: t("inviteSent"),
+        description: "Invite sent successfully!",
       });
       setInviteEmail("");
       setAccessLevel("VIEW");
@@ -146,7 +142,7 @@ export function ShareDialog({
       setSharedUsers((prev) => prev.filter((u) => u.id !== accessId));
       toast({
         title: "Success",
-        description: t("accessRevoked"),
+        description: "Access revoked successfully!",
       });
     } catch (error) {
       toast({
@@ -169,7 +165,7 @@ export function ShareDialog({
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{t("shareTree")}</DialogTitle>
+          <DialogTitle>Share Family Tree</DialogTitle>
           <DialogDescription>
             Manage who can access your family tree
           </DialogDescription>
@@ -181,9 +177,9 @@ export function ShareDialog({
             <CardContent className="pt-6 space-y-4">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label htmlFor="public">{t("publicTree")}</Label>
+                  <Label htmlFor="public">Public Tree</Label>
                   <p className="text-sm text-muted-foreground">
-                    {t("publicTreeDescription")}
+                    Anyone with the link can view this tree
                   </p>
                 </div>
                 <Switch
@@ -195,9 +191,9 @@ export function ShareDialog({
 
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label htmlFor="hideLiving">{t("hideLiving")}</Label>
+                  <Label htmlFor="hideLiving">Hide Living People</Label>
                   <p className="text-sm text-muted-foreground">
-                    {t("hideLivingDescription")}
+                    Living people will be hidden in shared views
                   </p>
                 </div>
                 <Switch
@@ -214,7 +210,7 @@ export function ShareDialog({
             <CardContent className="pt-6 space-y-4">
               <div className="flex items-center gap-2 mb-4">
                 <LinkIcon className="h-5 w-5 text-muted-foreground" />
-                <h3 className="font-semibold">{t("shareLink")}</h3>
+                <h3 className="font-semibold">Share Link</h3>
               </div>
 
               {shareToken ? (
@@ -247,7 +243,7 @@ export function ShareDialog({
               )}
 
               <p className="text-xs text-muted-foreground">
-                {t("anyoneWithLink")}
+                Anyone with the link can view
               </p>
             </CardContent>
           </Card>
@@ -257,13 +253,13 @@ export function ShareDialog({
             <CardContent className="pt-6 space-y-4">
               <div className="flex items-center gap-2 mb-4">
                 <Mail className="h-5 w-5 text-muted-foreground" />
-                <h3 className="font-semibold">{t("inviteByEmail")}</h3>
+                <h3 className="font-semibold">Invite by Email</h3>
               </div>
 
               <div className="flex gap-2">
                 <Input
                   type="email"
-                  placeholder={t("emailAddress")}
+                  placeholder="Email Address"
                   value={inviteEmail}
                   onChange={(e) => setInviteEmail(e.target.value)}
                 />
@@ -272,17 +268,17 @@ export function ShareDialog({
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="VIEW">{t("accessLevels.VIEW")}</SelectItem>
-                    <SelectItem value="EDIT">{t("accessLevels.EDIT")}</SelectItem>
-                    <SelectItem value="ADMIN">{t("accessLevels.ADMIN")}</SelectItem>
+                    <SelectItem value="VIEW">View Only</SelectItem>
+                    <SelectItem value="EDIT">Can Edit</SelectItem>
+                    <SelectItem value="ADMIN">Admin</SelectItem>
                   </SelectContent>
                 </Select>
                 <Button
                   onClick={handleInvite}
                   disabled={!inviteEmail || isInviting}
                 >
-                  <UserPlus className="h-4 w-4 mr-2 rtl:ml-2 rtl:mr-0" />
-                  {isInviting ? "Sending..." : t("sendInvite")}
+                  <UserPlus className="h-4 w-4 mr-2" />
+                  {isInviting ? "Sending..." : "Send Invite"}
                 </Button>
               </div>
             </CardContent>
@@ -294,7 +290,7 @@ export function ShareDialog({
               <CardContent className="pt-6 space-y-4">
                 <div className="flex items-center gap-2 mb-4">
                   <UserPlus className="h-5 w-5 text-muted-foreground" />
-                  <h3 className="font-semibold">{t("peopleWithAccess")}</h3>
+                  <h3 className="font-semibold">People with Access</h3>
                 </div>
 
                 <div className="space-y-3">
@@ -317,7 +313,9 @@ export function ShareDialog({
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Badge variant="outline">{t(`accessLevels.${user.accessLevel}`)}</Badge>
+                        <Badge variant="outline">
+                          {user.accessLevel === "VIEW" ? "View Only" : user.accessLevel === "EDIT" ? "Can Edit" : "Admin"}
+                        </Badge>
                         <Button
                           size="icon"
                           variant="ghost"

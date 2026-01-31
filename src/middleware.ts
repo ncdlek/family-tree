@@ -1,18 +1,19 @@
-import createMiddleware from "next-intl/middleware";
-import { locales, defaultLocale } from "./i18n";
+import { auth } from "@/lib/auth";
+import { NextResponse } from "next/server";
 
-export default createMiddleware({
-  locales,
-  defaultLocale,
-  localePrefix: "as-needed",
+export default auth((req) => {
+  // Protect /dashboard and /trees routes
+  const pathname = req.nextUrl.pathname;
+
+  if (pathname.startsWith("/dashboard") || pathname.startsWith("/trees")) {
+    if (!req.auth) {
+      return NextResponse.redirect(new URL("/login", req.url));
+    }
+  }
+
+  return NextResponse.next();
 });
 
 export const config = {
-  // Match only internationalized pathnames
-  matcher: [
-    // Match all pathnames except for
-    // - … if they start with `/api`, `/_next` or `/_vercel`
-    // - … the ones containing a dot (e.g. `favicon.ico`)
-    "/((?!api|_next|_vercel|.*\\..*).*)",
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

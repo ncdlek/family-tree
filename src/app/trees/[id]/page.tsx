@@ -339,11 +339,11 @@ export default function TreeViewPage() {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => router.push(`/${locale}/trees/${treeId}/edit`)}>
+                  <DropdownMenuItem onClick={() => router.push(`/trees/${treeId}/edit`)}>
                     <Settings className="h-4 w-4 mr-2 rtl:ml-2 rtl:mr-0" />
                     Tree Settings
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => router.push(`/${locale}/trees/${treeId}/people`)}>
+                  <DropdownMenuItem onClick={() => router.push(`/trees/${treeId}/people`)}>
                     <Users className="h-4 w-4 mr-2 rtl:ml-2 rtl:mr-0" />
                     Manage People
                   </DropdownMenuItem>

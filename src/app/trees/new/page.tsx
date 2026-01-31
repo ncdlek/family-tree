@@ -58,7 +58,7 @@ export default function NewTreePage() {
         description: "Family tree created successfully",
       });
 
-      router.push(`/${locale}/dashboard`);
+      router.push(`/dashboard`);
     } catch (error: any) {
       toast({
         title: "Error",
@@ -73,7 +73,7 @@ export default function NewTreePage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-2xl">
       <div className="mb-6">
-        <Link href={`/${locale}/dashboard`}>
+        <Link href={`/dashboard`}>
           <Button variant="ghost" size="sm">
             <ArrowLeft className="h-4 w-4 mr-2 rtl:ml-2 rtl:mr-0" />
             Back to Dashboard

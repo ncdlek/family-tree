@@ -80,13 +80,13 @@ export default function TreePeoplePage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-6 flex items-center justify-between">
-        <Link href={`/${locale}/trees/${treeId}`}>
+        <Link href={`/trees/${treeId}`}>
           <Button variant="ghost" size="sm">
             <ArrowLeft className="h-4 w-4 mr-2 rtl:ml-2 rtl:mr-0" />
             Back to Tree
           </Button>
         </Link>
-        <Link href={`/${locale}/trees/${treeId}`}>
+        <Link href={`/trees/${treeId}`}>
           <Button>
             <Plus className="h-4 w-4 mr-2 rtl:ml-2 rtl:mr-0" />
             Add Person
@@ -124,7 +124,7 @@ export default function TreePeoplePage() {
                 {searchQuery ? "No people found" : "No people in this tree yet"}
               </p>
               {!searchQuery && (
-                <Link href={`/${locale}/trees/${treeId}`}>
+                <Link href={`/trees/${treeId}`}>
                   <Button>
                     <Plus className="h-4 w-4 mr-2 rtl:ml-2 rtl:mr-0" />
                     Add Your First Person
@@ -138,7 +138,7 @@ export default function TreePeoplePage() {
                 <Card
                   key={person.id}
                   className="hover:shadow-md transition-shadow cursor-pointer"
-                  onClick={() => router.push(`/${locale}/trees/${treeId}`)}
+                  onClick={() => router.push(`/trees/${treeId}`)}
                 >
                   <CardContent className="p-4">
                     <div className="flex items-start gap-4">

@@ -125,7 +125,7 @@ export default function EditTreePage() {
         description: "Family tree deleted successfully",
       });
 
-      router.push(`/${locale}/dashboard`);
+      router.push(`/dashboard`);
     } catch (error: any) {
       toast({
         title: "Error",
@@ -149,7 +149,7 @@ export default function EditTreePage() {
         <Card className="text-center">
           <CardContent className="pt-6">
             <p>Tree not found</p>
-            <Link href={`/${locale}/dashboard`}>
+            <Link href={`/dashboard`}>
               <Button>Back to Dashboard</Button>
             </Link>
           </CardContent>
@@ -161,7 +161,7 @@ export default function EditTreePage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-2xl">
       <div className="mb-6 flex items-center justify-between">
-        <Link href={`/${locale}/trees/${treeId}`}>
+        <Link href={`/trees/${treeId}`}>
           <Button variant="ghost" size="sm">
             <ArrowLeft className="h-4 w-4 mr-2 rtl:ml-2 rtl:mr-0" />
             Back to Tree
@@ -237,7 +237,7 @@ export default function EditTreePage() {
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => router.push(`/${locale}/trees/${treeId}`)}
+                onClick={() => router.push(`/trees/${treeId}`)}
                 disabled={isSubmitting}
               >
                 Cancel

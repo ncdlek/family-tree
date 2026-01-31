@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
@@ -12,51 +11,20 @@ import { TreePine } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
 
-export default function SignupPage() {
-  const t = useTranslations("auth");
+export default function LoginPage() {
   const router = useRouter();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (formData.password !== formData.confirmPassword) {
-      toast({
-        title: "Error",
-        description: "Passwords do not match",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setIsLoading(true);
 
     try {
-      // Register user
-      const response = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Something went wrong");
-      }
-
-      // Sign in after successful registration
       const result = await signIn("credentials", {
         email: formData.email,
         password: formData.password,
@@ -64,20 +32,19 @@ export default function SignupPage() {
       });
 
       if (result?.error) {
-        throw new Error("Registration successful but login failed");
+        toast({
+          title: "Error",
+          description: "Invalid email or password",
+          variant: "destructive",
+        });
+      } else {
+        router.push("/dashboard");
+        router.refresh();
       }
-
-      toast({
-        title: "Success",
-        description: "Account created successfully!",
-      });
-
-      router.push("/dashboard");
-      router.refresh();
-    } catch (error: any) {
+    } catch (error) {
       toast({
         title: "Error",
-        description: error.message || "Something went wrong",
+        description: "Something went wrong",
         variant: "destructive",
       });
     } finally {
@@ -108,28 +75,18 @@ export default function SignupPage() {
               <TreePine className="h-8 w-8 text-primary" />
             </div>
           </div>
-          <CardTitle>{t("signUp")}</CardTitle>
+          <CardTitle>Sign In</CardTitle>
           <CardDescription>
-            {t("alreadyHaveAccount")}{" "}
-            <Link href="/login" className="text-primary hover:underline">
-              {t("signIn")}
+            Don&apos;t have an account?{" "}
+            <Link href="/signup" className="text-primary hover:underline">
+              Sign Up
             </Link>
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">{t("name")}</Label>
-              <Input
-                id="name"
-                placeholder="John Doe"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">{t("email")}</Label>
+              <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -140,29 +97,25 @@ export default function SignupPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">{t("password")}</Label>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password">Password</Label>
+                <Link
+                  href="/forgot-password"
+                  className="text-sm text-primary hover:underline"
+                >
+                  Forgot password?
+                </Link>
+              </div>
               <Input
                 id="password"
                 type="password"
-                placeholder="••••••••"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 required
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="confirmPassword">{t("confirmPassword")}</Label>
-              <Input
-                id="confirmPassword"
-                type="password"
-                placeholder="••••••••"
-                value={formData.confirmPassword}
-                onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                required
-              />
-            </div>
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Loading..." : t("signUp")}
+              {isLoading ? "Loading..." : "Sign In"}
             </Button>
           </form>
 
@@ -202,7 +155,7 @@ export default function SignupPage() {
                 fill="#EA4335"
               />
             </svg>
-            {t("signInWithGoogle")}
+            Sign in with Google
           </Button>
         </CardContent>
       </Card>

@@ -1,4 +1,3 @@
-import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { TreePine, Users, Shield, Globe, ArrowRight } from "lucide-react";
@@ -6,16 +5,11 @@ import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
-export default async function HomePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
+export default async function HomePage() {
   const session = await auth();
 
   if (session?.user) {
-    redirect(`/${locale}/dashboard`);
+    redirect("/dashboard");
   }
 
   return (
@@ -40,12 +34,12 @@ export default async function HomePage({
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={`/${locale}/signup`} className="w-full sm:w-auto">
+              <Link href="/signup" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto rounded-full shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/40">
                   Get Started Free
                 </Button>
               </Link>
-              <Link href={`/${locale}/login`}>
+              <Link href="/login">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full">
                   Sign In
                 </Button>
@@ -160,7 +154,7 @@ export default async function HomePage({
             <p className="text-xl text-foreground/70 mb-8">
               Start building your family tree today. It&apos;s free forever.
             </p>
-            <Link href={`/${locale}/signup`}>
+            <Link href="/signup">
               <Button size="lg" className="rounded-full shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/40">
                 Get Started Now
                 <ArrowRight className="ml-2 w-5 h-5" />

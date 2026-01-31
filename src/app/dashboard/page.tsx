@@ -5,18 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { TreePine, Plus, Users, Calendar } from "lucide-react";
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
 
-export default async function DashboardPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
+export default async function DashboardPage() {
   const session = await auth();
 
   if (!session?.user) {
-    redirect(`/${locale}/login`);
+    redirect("/login");
   }
 
   const trees = await prisma.tree.findMany({
@@ -34,9 +28,9 @@ export default async function DashboardPage({
             Welcome back, {session.user.name}!
           </p>
         </div>
-        <Link href={`/${locale}/trees/new`}>
+        <Link href="/trees/new">
           <Button>
-            <Plus className="h-4 w-4 mr-2 rtl:ml-2 rtl:mr-0" />
+            <Plus className="h-4 w-4 mr-2" />
             Create Tree
           </Button>
         </Link>
@@ -52,9 +46,9 @@ export default async function DashboardPage({
             </div>
             <h2 className="text-xl font-semibold">You don&apos;t have any family trees yet.</h2>
             <p className="text-muted-foreground">Create your first family tree to get started.</p>
-            <Link href={`/${locale}/trees/new`}>
+            <Link href="/trees/new">
               <Button size="lg">
-                <Plus className="h-4 w-4 mr-2 rtl:ml-2 rtl:mr-0" />
+                <Plus className="h-4 w-4 mr-2" />
                 Create New Tree
               </Button>
             </Link>
@@ -87,12 +81,12 @@ export default async function DashboardPage({
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Link href={`/${locale}/trees/${tree.id}`} className="flex-1">
+                  <Link href={`/trees/${tree.id}`} className="flex-1">
                     <Button variant="outline" size="sm" className="w-full">
                       View Tree
                     </Button>
                   </Link>
-                  <Link href={`/${locale}/trees/${tree.id}/edit`} className="flex-1">
+                  <Link href={`/trees/${tree.id}/edit`} className="flex-1">
                     <Button size="sm" className="w-full">
                       Edit
                     </Button>

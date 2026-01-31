@@ -34,7 +34,7 @@ export default async function HomePage({
               Family Tree
             </h1>
 
-            <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10">
+            <p className="text-xl sm:text-2xl text-foreground/70 max-w-2xl mx-auto mb-10">
               Preserve your family history with our beautiful interactive tree builder
             </p>
 
@@ -53,7 +53,7 @@ export default async function HomePage({
             </div>
 
             {/* Trust indicators */}
-            <p className="text-sm text-gray-500 mt-8">
+            <p className="text-sm text-foreground/60 mt-8">
               No credit card required • Free forever
             </p>
           </div>
@@ -74,7 +74,7 @@ export default async function HomePage({
                   <TreePine className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Interactive Tree</h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                <p className="text-foreground/70 leading-relaxed">
                   Beautiful drag-and-drop interface to build and visualize your family connections
                 </p>
               </CardContent>
@@ -87,7 +87,7 @@ export default async function HomePage({
                   <Shield className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Privacy First</h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                <p className="text-foreground/70 leading-relaxed">
                   Control who sees your information with advanced privacy controls
                 </p>
               </CardContent>
@@ -100,7 +100,7 @@ export default async function HomePage({
                   <Globe className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Multi-Language</h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                <p className="text-foreground/70 leading-relaxed">
                   Full RTL support with English, Turkish, and Arabic
                 </p>
               </CardContent>
@@ -122,7 +122,7 @@ export default async function HomePage({
                 1
               </div>
               <h3 className="text-lg font-semibold mb-2">Create your tree</h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-foreground/70">
                 Start by adding family members and their relationships
               </p>
             </div>
@@ -132,7 +132,7 @@ export default async function HomePage({
                 2
               </div>
               <h3 className="text-lg font-semibold mb-2">Add details</h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-foreground/70">
                 Include photos, dates, events, and stories
               </p>
             </div>
@@ -142,7 +142,7 @@ export default async function HomePage({
                 3
               </div>
               <h3 className="text-lg font-semibold mb-2">Share & collaborate</h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-foreground/70">
                 Invite family members to contribute and view your tree
               </p>
             </div>
@@ -157,7 +157,7 @@ export default async function HomePage({
             <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
               Ready to preserve your family legacy?
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
+            <p className="text-xl text-foreground/70 mb-8">
               Start building your family tree today. It&apos;s free forever.
             </p>
             <Link href={`/${locale}/signup`}>

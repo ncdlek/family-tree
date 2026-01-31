@@ -7,6 +7,9 @@ import { Providers } from "@/components/providers";
 import "../globals.css";
 import { locales, isRTL } from "@/i18n";
 
+// Force dynamic rendering for i18n
+export const dynamic = "force-dynamic";
+
 interface RootLayoutProps {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -22,6 +25,10 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
   if (!locales.includes(locale as any)) {
     notFound();
   }
+
+  // Using setRequestLocale to enable proper locale handling
+  const { setRequestLocale } = await import("next-intl/server");
+  setRequestLocale(locale);
 
   const messages = await getMessages();
   const rtl = isRTL(locale as any);

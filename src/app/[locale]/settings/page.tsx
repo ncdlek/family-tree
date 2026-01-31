@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { useLocale } from "next-intl";
+import React, { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,7 +15,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { User, Globe, Bell, Lock } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { useToast } from "@/hooks/use-toast";
 
 const languages = [
@@ -25,9 +24,11 @@ const languages = [
 ];
 
 export default function SettingsPage() {
-  const t = useTranslations("settings");
-  const locale = useLocale();
+  const params = useParams();
+  const router = useRouter();
   const { toast } = useToast();
+
+  const locale = (params.locale as string) || "en";
 
   const [profile, setProfile] = useState({
     name: "",
@@ -41,27 +42,6 @@ export default function SettingsPage() {
 
   const [isSaving, setIsSaving] = useState(false);
 
-  useEffect(() => {
-    // Fetch user profile
-    fetch("/api/user/profile")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.user) {
-          setProfile({
-            name: data.user.name || "",
-            email: data.user.email || "",
-          });
-        }
-      })
-      .catch(() => {
-        // Mock data for demo
-        setProfile({
-          name: "Demo User",
-          email: "demo@example.com",
-        });
-      });
-  }, []);
-
   const handleProfileUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
@@ -71,7 +51,7 @@ export default function SettingsPage() {
       setIsSaving(false);
       toast({
         title: "Success",
-        description: t("profileUpdated"),
+        description: "Profile updated successfully!",
       });
     }, 500);
   };
@@ -85,7 +65,7 @@ export default function SettingsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <h1 className="text-3xl font-bold mb-8">{t("settings")}</h1>
+      <h1 className="text-3xl font-bold mb-8">Settings</h1>
 
       <div className="space-y-6">
         {/* Profile Section */}
@@ -96,7 +76,7 @@ export default function SettingsPage() {
                 <User className="h-5 w-5" />
               </div>
               <div>
-                <CardTitle>{t("profile")}</CardTitle>
+                <CardTitle>Profile</CardTitle>
                 <CardDescription>Update your personal information</CardDescription>
               </div>
             </div>
@@ -104,7 +84,7 @@ export default function SettingsPage() {
           <CardContent>
             <form onSubmit={handleProfileUpdate} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="name">{t("profile")}</Label>
+                <Label htmlFor="name">Name</Label>
                 <Input
                   id="name"
                   value={profile.name}
@@ -137,14 +117,14 @@ export default function SettingsPage() {
                 <Globe className="h-5 w-5" />
               </div>
               <div>
-                <CardTitle>{t("preferences")}</CardTitle>
+                <CardTitle>Preferences</CardTitle>
                 <CardDescription>Customize your experience</CardDescription>
               </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="language">{t("language")}</Label>
+              <Label htmlFor="language">Language</Label>
               <Select
                 value={preferences.language}
                 onValueChange={handleLanguageChange}
@@ -164,9 +144,9 @@ export default function SettingsPage() {
 
             <div className="flex items-center justify-between">
               <div>
-                <Label htmlFor="notifications">{t("notifications")}</Label>
+                <Label htmlFor="notifications">Notifications</Label>
                 <p className="text-sm text-muted-foreground">
-                  {t("emailPreferences")}
+                  Email notifications and updates
                 </p>
               </div>
               <Switch
@@ -188,14 +168,14 @@ export default function SettingsPage() {
                 <Lock className="h-5 w-5" />
               </div>
               <div>
-                <CardTitle>{t("account")}</CardTitle>
+                <CardTitle>Account</CardTitle>
                 <CardDescription>Manage your account settings</CardDescription>
               </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
-            <Button variant="outline" onClick={() => {}}>
-              {t("changePassword")}
+            <Button variant="outline" onClick={() => router.back()}>
+              Back to Dashboard
             </Button>
           </CardContent>
         </Card>

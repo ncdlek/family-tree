@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { TreePine, Users, Shield, Globe } from "lucide-react";
@@ -11,13 +11,14 @@ export default async function HomePage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   const session = await auth();
 
   if (session?.user) {
-    redirect(`/${(await params).locale}/dashboard`);
+    redirect(`/${locale}/dashboard`);
   }
 
-  const t = (await import(`../../../../messages/${(await params).locale}.json`)).default;
+  const t = await getTranslations();
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
@@ -29,20 +30,20 @@ export default async function HomePage({
             </div>
           </div>
           <h1 className="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-indigo-600">
-            {t.nav.home}
+            Family Tree
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            {t.tree.noTreesYet}
+            Build your family history with our interactive tree builder.
           </p>
           <div className="flex gap-4 justify-center mt-8">
-            <Link href={`/${(await params).locale}/signup`}>
+            <Link href={`/${locale}/signup`}>
               <Button size="lg">
-                {t.auth.signUp}
+                Get Started
               </Button>
             </Link>
-            <Link href={`/${(await params).locale}/login`}>
+            <Link href={`/${locale}/login`}>
               <Button size="lg" variant="outline">
-                {t.auth.signIn}
+                Sign In
               </Button>
             </Link>
           </div>

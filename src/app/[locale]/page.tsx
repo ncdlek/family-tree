@@ -25,22 +25,22 @@ export default async function HomePage({
         <div className="container mx-auto px-4 sm:px-6 py-24 sm:py-32">
           <div className="max-w-4xl mx-auto text-center">
             {/* Logo/Icon */}
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg shadow-blue-500/25 mb-8 animate-fade-in">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg shadow-blue-500/25 mb-8">
               <TreePine className="h-8 w-8 text-white" />
             </div>
 
             {/* Heading */}
-            <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-gray-900 dark:text-white mb-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+            <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
               Family Tree
             </h1>
 
-            <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+            <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10">
               Preserve your family history with our beautiful interactive tree builder
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: "0.3s" }}>
-              <Link href={`/${locale}/signup` className="w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href={`/${locale}/signup`} className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto rounded-full shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/40">
                   Get Started Free
                 </Button>
@@ -53,7 +53,7 @@ export default async function HomePage({
             </div>
 
             {/* Trust indicators */}
-            <p className="text-sm text-gray-500 mt-8 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+            <p className="text-sm text-gray-500 mt-8">
               No credit card required • Free forever
             </p>
           </div>
@@ -158,7 +158,7 @@ export default async function HomePage({
               Ready to preserve your family legacy?
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
-              Start building your family tree today. It's free forever.
+              Start building your family tree today. It&apos;s free forever.
             </p>
             <Link href={`/${locale}/signup`}>
               <Button size="lg" className="rounded-full shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/40">

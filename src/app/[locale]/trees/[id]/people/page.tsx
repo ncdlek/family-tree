@@ -69,11 +69,11 @@ export default function TreePeoplePage() {
   const getGenderColor = (gender: string) => {
     switch (gender) {
       case "MALE":
-        return "bg-blue-100 text-blue-700";
+        return "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400";
       case "FEMALE":
-        return "bg-pink-100 text-pink-700";
+        return "bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-400";
       default:
-        return "bg-purple-100 text-purple-700";
+        return "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400";
     }
   };
 

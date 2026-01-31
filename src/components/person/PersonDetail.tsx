@@ -322,12 +322,12 @@ function PersonLink({ person, relation, date }: PersonLinkProps) {
           <AvatarImage src={person.photoUrl} alt={person.firstName} />
         ) : (
           <AvatarFallback
-            className={`text-xs ${
+            className={`text-xs font-medium ${
               person.gender === "MALE"
-                ? "bg-blue-100 text-blue-700"
+                ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
                 : person.gender === "FEMALE"
-                ? "bg-pink-100 text-pink-700"
-                : "bg-purple-100 text-purple-700"
+                ? "bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-400"
+                : "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400"
             }`}
           >
             {getInitials(person.firstName, person.lastName)}
